@@ -1,3 +1,3 @@
 # playSchool
 
-playSchool na githubie blo gitlab dmcs nie działał
+playSchool na githubie bo gitlab dmcs nie działał
