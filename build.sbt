@@ -13,6 +13,7 @@ libraryDependencies ++= Seq(
   guice,
   "org.postgresql" % "postgresql" % "9.4-1206-jdbc42",
   "javax.mail" % "mail" % "1.4",
+  "it.innove" % "play2-pdf" % "1.6.0",
   javaJdbc,
   cache,
   javaWs )

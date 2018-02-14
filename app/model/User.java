@@ -119,8 +119,14 @@ public class User extends Model {
     }
 
     public static User findByAutenticationData(String login, String password) {
-        User u = User.find.query().where().eq("username", login).findUnique();
+        User u = User.find.query().where().eq("username", login).eq("password", password).findUnique();
         if (u != null ) return u;
         else return null;
+    }
+
+    public static User findByUsername(String username)
+    {
+        User u = User.find.query().where().eq("username", username).findUnique();
+        return u;
     }
 }

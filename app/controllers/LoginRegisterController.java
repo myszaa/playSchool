@@ -35,7 +35,7 @@ public class LoginRegisterController extends Controller {
         if(user != null)
         {
             Http.Context.current().session().put("userId", user.getUsername());
-            return redirect(routes.Application.index()+ Http.Context.current().session().get("userId"));
+            return redirect(routes.Application.index());
         }
         return ok();
     }
