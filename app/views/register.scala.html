@@ -1,0 +1,36 @@
+@import model.User
+@(form: Form[User])
+@main("Dziennik") {
+    <form method="post" action="@routes.LoginRegisterController.doRegister()">
+        <div class="row">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" value="@form("username").getValue().getOrElse("")" />
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="firstname">Firstname</label>
+            <input type="text" id="firstname" name="firstname" class="form-control" value="@form("firstname").getValue().getOrElse("")" />
+        </div>
+
+        <div class="row">
+            <label for="lastname">Lastname</label>
+            <input type="text" id="lastname" name="lastname" class="form-control" value="@form("lastname").getValue().getOrElse("")" />
+        </div>
+
+        <div class="row">
+            <label for="email">email</label>
+            <input type="email" id="email" name="email" class="form-control" value="@form("email").getValue().getOrElse("")" />
+        </div>
+
+        <div class="row">
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" class="form-control" value="@form("password").getValue().getOrElse("")" />
+        </div>
+
+        <div class="row">
+            <input type="submit" value = "Zarejestruj"/>
+        </div>
+
+    </form>
+}
