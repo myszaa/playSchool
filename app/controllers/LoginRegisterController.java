@@ -1,6 +1,9 @@
 package controllers;
 
+import be.objectify.deadbolt.java.actions.SubjectNotPresent;
+import be.objectify.deadbolt.java.actions.SubjectPresent;
 import model.User;
+import model.UserRole;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -21,10 +24,11 @@ public class LoginRegisterController extends Controller {
     @Inject
     FormFactory formFactory;
 
+    @SubjectNotPresent
     public Result register() {
         return ok(register.render(formFactory.form(User.class),Http.Context.current().messages()));
     }
-
+    @SubjectNotPresent
     public Result login() {
         return ok(login.render(Http.Context.current().messages()));
     }
@@ -39,13 +43,13 @@ public class LoginRegisterController extends Controller {
         }
         return ok();
     }
-
+    @SubjectPresent
     public Result logout()
     {
         Http.Context.current().session().clear();
         return redirect(routes.Application.index());
     }
-
+    @SubjectNotPresent
     public Result doRegister() {
         Form<User> formClient = formFactory.form(User.class).bindFromRequest();
 
@@ -58,6 +62,7 @@ public class LoginRegisterController extends Controller {
             if (RecaptchaService.verify(form.get("g-recaptcha-response"))) {
                 user.setEnabled(false);
                 user.setActivationtoken(generateActivationToken());
+                user.getUserRoles().add(UserRole.findByUserRole("Student"));
                 MailService.sendEmail(user);
                 user.save();
             }
@@ -71,7 +76,7 @@ public class LoginRegisterController extends Controller {
     {
         return UUID.randomUUID().toString();
     }
-
+    @SubjectNotPresent
     public Result activate() {
         String code = Http.Context.current().request().getQueryString("code");
         if(code != null && code.length() > 0)
@@ -85,6 +90,10 @@ public class LoginRegisterController extends Controller {
             }
         }
         return ok();
+    }
+
+    public Result accessDenied() {
+        return ok(accessDenied.render(Http.Context.current().messages()));
     }
 
 }

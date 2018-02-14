@@ -11,7 +11,7 @@
 
             <label for="login_password" class="sr-only">Password</label>
             <input type="password" name="password" placeholder="Password" id="login_password" class="form-control" required/>
-
+            @helper.CSRF.formField
             <input type="submit" class="btn btn-lg btn-primary btn-block" value = "@messages.at("home.login")"/>
 
         </form>

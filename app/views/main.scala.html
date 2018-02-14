@@ -1,4 +1,6 @@
 @(title: String)(content: Html)(messages: play.i18n.Messages)
+@import be.objectify.deadbolt.java.views.html.restrict
+@import be.objectify.deadbolt.java.utils.TemplateUtils.allOfGroup
 
 <!DOCTYPE html>
 
@@ -16,6 +18,12 @@
         <link href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")" rel="stylesheet">
     </head>
     <body>
+        @restrict(roles = allOfGroup("Administrator")) {
+            <li><a href="@routes.Application.addRole()">@messages.at("admin.role")</a></li>
+        }
+        @restrict(roles = allOfGroup("Teacher")) {
+            <li><a href="@routes.Application.addSubject()">@messages.at("teacher.subject")</a></li>
+        }
         <li><a href="@routes.Application.changeToPolish()">PL</a></li>
         <li><a href=@routes.Application.changeToEng()>EN</a></li>
         <a href="@routes.LoginRegisterController.register()">@messages.at("home.register")</a>

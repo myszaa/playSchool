@@ -31,9 +31,19 @@ public class User extends Model implements Subject {
     private String email;
     @Constraints.Required(message="error.field.required")
     private String password;
-    @Constraints.Required(message="error.field.required")
     private boolean enabled;
     private String activationtoken;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<UserRole> userRoles = new ArrayList<>();
+
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
 
     public String getUsername() {
         return username;
@@ -145,7 +155,7 @@ public class User extends Model implements Subject {
 
     @Override
     public List<? extends Role> getRoles() {
-        return null;
+        return getUserRoles();
     }
 
     @Override
@@ -156,5 +166,9 @@ public class User extends Model implements Subject {
     @Override
     public String getIdentifier() {
         return username;
+    }
+
+    public static List<User> getAllUsers() {
+        return User.find.all();
     }
 }

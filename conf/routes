@@ -12,7 +12,11 @@ POST    /register                   controllers.LoginRegisterController.doRegist
 GET     /activate                   controllers.LoginRegisterController.activate()
 GET     /login                      controllers.LoginRegisterController.login()
 POST    /login                      controllers.LoginRegisterController.doLogin()
-GET     /logout                      controllers.LoginRegisterController.logout()
+GET     /logout                     controllers.LoginRegisterController.logout()
+GET     /authFailure                controllers.LoginRegisterController.accessDenied()
+GET     /addRole                    controllers.Application.addRole()
+POST    /addRole                    controllers.Application.addRoleToUser()
+GET     /addSubject                 controllers.Application.addSubject()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file)
