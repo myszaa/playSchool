@@ -32,7 +32,8 @@ public class MailService {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(user.getEmail()));
             message.setSubject("Aktywacja konta na seriwsie playSchool");
-            message.setText("Dziękujemy za rejestracje");
+            message.setText("Dziękujemy za rejestracje, Aby aktywować konto, kliknij w poniższy link.\n" +
+                    " http://localhost:9000/activate?code=" + user.getActivationtoken());
 
             Transport.send(message);
 

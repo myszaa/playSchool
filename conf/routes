@@ -6,6 +6,7 @@
 GET     /                           controllers.Application.index()
 GET     /register                   controllers.LoginRegisterController.register()
 POST    /register                   controllers.LoginRegisterController.doRegister()
+GET     /activate                   controllers.LoginRegisterController.activate()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

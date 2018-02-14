@@ -1,5 +1,6 @@
 package model;
 
+import io.ebean.Finder;
 import io.ebean.Model;
 
 import javax.persistence.*;
@@ -109,5 +110,11 @@ public class User extends Model {
                 ", enabled=" + enabled +
                 ", activationtoken='" + activationtoken + '\'' +
                 '}';
+    }
+
+    public static final Finder<Long, User> find = new Finder<>(User.class);
+
+    public static User findByActivationtoken(String code) {
+        return User.find.query().where().eq("activationtoken", code).findUnique();
     }
 }

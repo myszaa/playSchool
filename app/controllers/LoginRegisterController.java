@@ -36,4 +36,19 @@ public class LoginRegisterController extends Controller {
         return UUID.randomUUID().toString();
     }
 
+    public Result activate() {
+        String code = Http.Context.current().request().getQueryString("code");
+        if(code != null && code.length() > 0)
+        {
+            User user = User.findByActivationtoken(code);
+            if (user != null && !user.isEnabled())
+            {
+                user.setEnabled(true);
+                user.setActivationtoken("");
+                user.save();
+            }
+        }
+        return ok();
+    }
+
 }
