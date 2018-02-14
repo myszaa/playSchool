@@ -1,6 +1,7 @@
 @import model.User
 @(form: Form[User])
 @main("Dziennik") {
+
     <form method="post" action="@routes.LoginRegisterController.doRegister()">
         <div class="row">
             <label for="username">Username</label>
@@ -28,9 +29,14 @@
             <input type="password" id="password" name="password" class="form-control" value="@form("password").getValue().getOrElse("")" />
         </div>
 
+        @helper.CSRF.formField
+        <div class="row">
+            <div class="g-recaptcha" data-sitekey="6LfiVUYUAAAAAP3qovI4Or1-X2xKARJyLHBu96BL"></div>
+            <div>test</div>
+        </div>
         <div class="row">
             <input type="submit" value = "Zarejestruj"/>
         </div>
-
     </form>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 }

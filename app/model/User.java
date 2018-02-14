@@ -117,4 +117,10 @@ public class User extends Model {
     public static User findByActivationtoken(String code) {
         return User.find.query().where().eq("activationtoken", code).findUnique();
     }
+
+    public static User findByAutenticationData(String login, String password) {
+        User u = User.find.query().where().eq("username", login).findUnique();
+        if (u != null ) return u;
+        else return null;
+    }
 }

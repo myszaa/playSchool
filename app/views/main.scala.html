@@ -5,12 +5,22 @@
 <html>
     <head>
         <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <script src="@routes.Assets.versioned("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+            <!-- Bootstrap core CSS -->
+        <link href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")" rel="stylesheet">
     </head>
     <body>
         <a href="@routes.LoginRegisterController.register()">Zarejestruj</a>
+        <a href="@routes.LoginRegisterController.login()">Zaloguj</a>
+        <a href="@routes.LoginRegisterController.logout()">Wyloguj</a>
         @content
     </body>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+    <script src="@routes.Assets.versioned("javascripts/jquery.min.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
 </html>
