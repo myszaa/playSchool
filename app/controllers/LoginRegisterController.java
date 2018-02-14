@@ -32,7 +32,7 @@ public class LoginRegisterController extends Controller {
     public Result doLogin() {
         DynamicForm form = formFactory.form().bindFromRequest();
         User user = User.findByAutenticationData(form.get("username"), form.get("password"));
-        if(user != null)
+        if(user != null && user.isEnabled())
         {
             Http.Context.current().session().put("userId", user.getUsername());
             return redirect(routes.Application.index());
