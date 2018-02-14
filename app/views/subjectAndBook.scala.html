@@ -1,0 +1,23 @@
+@(messages: play.i18n.Messages)(subjects: List[model.Subject])(books: List[model.Book])
+@main("Dziennik") {
+
+    <link href="@routes.Assets.versioned("stylesheets/style.css")" rel="stylesheet">
+    <div class="container">
+        <form class="form-signin" method="post" action="@routes.Application.addBookToSubject()">
+            <select name = "subject">
+                @for(index <- 0 until subjects.size) {
+                    <option value="@subjects(index).getSubject">@subjects(index).getSubject</option>
+                }
+            </select>
+
+            <select name = "book">
+                @for(index <- 0 until books.size) {
+                    <option value="@books(index).getBook">@books(index).getBook</option>
+                }
+            </select>
+            @helper.CSRF.formField
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value = "Dodaj ksiazke do przedmiotu"/>
+        </form>
+
+    </div>
+}(messages)

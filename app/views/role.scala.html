@@ -5,16 +5,16 @@
     <div class="container">
         <form class="form-signin" method="post" action="@routes.Application.addRoleToUser()">
             <select name = "userrole">
-            @for(index <- 0 until userRole.size) {
-                <option value="@userRole(index).getName">@userRole(index).getName</option>
-            }
+                @for(index <- 0 until userRole.size) {
+                    <option value="@userRole(index).getName">@userRole(index).getName</option>
+                }
             </select>
 
             <select name = "username">
-            @for(index <- 0 until user.size) {
-                <option value="@user(index).getUsername">@user(index).getUsername</option>
-            }
-            </select>
+                @for(index <- 0 until user.size) {
+                    <option value="@user(index).getUsername">@user(index).getUsername</option>
+                }
+                </select>
             @helper.CSRF.formField
             <input class="btn btn-lg btn-primary btn-block" type="submit" value = "Dodaj role"/>
         </form>

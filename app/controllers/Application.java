@@ -2,6 +2,8 @@ package controllers;
 
 import io.ebean.Finder;
 import it.innove.play.pdf.PdfGenerator;
+import model.Book;
+import model.Subject;
 import model.User;
 import model.UserRole;
 import play.*;
@@ -44,6 +46,18 @@ public class Application extends Controller {
             user.getUserRoles().add(UserRole.findByUserRole("Administrator"));
             user.setEnabled(true);
             user.save();
+        }
+        if(Book.getAllBooks().isEmpty())
+        {
+            Book book = new Book();
+            book.setBook("ksiazka");
+            book.save();
+        }
+        if(Subject.getAllSubjects().isEmpty())
+        {
+            Subject subject = new Subject();
+            subject.setSubject("przedmiot");
+            subject.save();
         }
         Logger.info("Language: " + ctx().lang().code());
         return ok(welcome.render(Http.Context.current().messages()));
@@ -99,6 +113,18 @@ public class Application extends Controller {
 
     public Result addSubject()
     {
-        return ok(subject.render(Http.Context.current().messages(),Subject.getAllSubjects(),User.getAllUsers()));
+        return ok(subjectAndBook.render(Http.Context.current().messages(), Subject.getAllSubjects(), Book.getAllBooks()));
+    }
+
+    public Result addBookToSubject()
+    {
+        DynamicForm form = formFactory.form().bindFromRequest();
+        Book book = Book.findByName(form.get("book"));
+        Subject subject = Subject.findByName(form.get("subject"));
+        book.setSubject(subject);
+        book.save();
+        subject.setBook(book);
+        subject.save();
+        return redirect(routes.Application.index());
     }
 }

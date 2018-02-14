@@ -41,7 +41,7 @@ public class LoginRegisterController extends Controller {
             Http.Context.current().session().put("userId", user.getUsername());
             return redirect(routes.Application.index());
         }
-        return ok();
+        return redirect(routes.Application.index());
     }
     @SubjectPresent
     public Result logout()
@@ -69,7 +69,7 @@ public class LoginRegisterController extends Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ok();
+        return redirect(routes.Application.index());
     }
 
     public String generateActivationToken()
@@ -89,7 +89,7 @@ public class LoginRegisterController extends Controller {
                 user.save();
             }
         }
-        return ok();
+        return redirect(routes.Application.index());
     }
 
     public Result accessDenied() {
