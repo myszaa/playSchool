@@ -42,6 +42,9 @@ public class Application extends Controller {
         {
             User user = new User();
             user.setUsername("admin");
+            user.setFirstname("Username");
+            user.setLastname("Lastname");
+            user.setEmail("Email");
             user.setPassword("admin");
             user.getUserRoles().add(UserRole.findByUserRole("Administrator"));
             user.setEnabled(true);

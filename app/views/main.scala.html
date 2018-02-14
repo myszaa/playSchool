@@ -20,11 +20,11 @@
     <body>
         @if(model.User.findByUsername(Http.Context.current().session().get("userId")) != null) {
             <li>
-                <a href="#">@model.User.findByUsername(Http.Context.current().session().get("userId")).getUsername</a>
+                <a href="@routes.Application.index()">@model.User.findByUsername(Http.Context.current().session().get("userId")).getUsername</a>
             </li>
         } else {
             <li>
-                <a href="#">Guest</a>
+                <a href="@routes.Application.index()">Guest</a>
             </li>
         }
         @restrict(roles = allOfGroup("Administrator")) {
@@ -37,7 +37,9 @@
         <li><a href=@routes.Application.changeToEng()>EN</a></li>
         @if(model.User.findByUsername(Http.Context.current().session().get("userId")) != null){
             <a href="@routes.LoginRegisterController.logout()">@messages.at("home.logout")</a>
-            <a href="@routes.Application.pdf()">PDF</a>
+            @restrict(roles = allOfGroup("Student")) {
+                <a href="@routes.Application.pdf()">PDF</a>
+            }
         } else {
             <a href="@routes.LoginRegisterController.register()">@messages.at("home.register")</a>
             <a href="@routes.LoginRegisterController.login()">@messages.at("home.login")</a>
