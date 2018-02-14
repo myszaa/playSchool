@@ -18,6 +18,15 @@
         <link href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")" rel="stylesheet">
     </head>
     <body>
+        @if(model.User.findByUsername(Http.Context.current().session().get("userId")) != null) {
+            <li>
+                <a href="#">@model.User.findByUsername(Http.Context.current().session().get("userId")).getUsername</a>
+            </li>
+        } else {
+            <li>
+                <a href="#">Guest</a>
+            </li>
+        }
         @restrict(roles = allOfGroup("Administrator")) {
             <li><a href="@routes.Application.addRole()">@messages.at("admin.role")</a></li>
         }
@@ -26,10 +35,13 @@
         }
         <li><a href="@routes.Application.changeToPolish()">PL</a></li>
         <li><a href=@routes.Application.changeToEng()>EN</a></li>
-        <a href="@routes.LoginRegisterController.register()">@messages.at("home.register")</a>
-        <a href="@routes.LoginRegisterController.login()">@messages.at("home.login")</a>
-        <a href="@routes.LoginRegisterController.logout()">@messages.at("home.logout")</a>
-        <a href="@routes.Application.pdf()">PDF</a>
+        @if(model.User.findByUsername(Http.Context.current().session().get("userId")) != null){
+            <a href="@routes.LoginRegisterController.logout()">@messages.at("home.logout")</a>
+            <a href="@routes.Application.pdf()">PDF</a>
+        } else {
+            <a href="@routes.LoginRegisterController.register()">@messages.at("home.register")</a>
+            <a href="@routes.LoginRegisterController.login()">@messages.at("home.login")</a>
+        }
         @content
     </body>
 
