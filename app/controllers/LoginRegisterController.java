@@ -43,7 +43,7 @@ public class LoginRegisterController extends Controller {
     public Result logout()
     {
         Http.Context.current().session().clear();
-        return redirect(routes.Application.index()+ Http.Context.current().session().get("userId"));
+        return redirect(routes.Application.index());
     }
 
     public Result doRegister() {
