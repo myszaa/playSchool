@@ -2,41 +2,31 @@
 @(form: Form[User])
 @main("Dziennik") {
 
-    <form method="post" action="@routes.LoginRegisterController.doRegister()">
-        <div class="row">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" class="form-control" value="@form("username").getValue().getOrElse("")" />
-            </div>
-        </div>
+    <link href="@routes.Assets.versioned("stylesheets/style.css")" rel="stylesheet">
+    <div class="container">
+        <form method="post" class="form-signin" action="@routes.LoginRegisterController.doRegister()">
 
-        <div class="row">
-            <label for="firstname">Firstname</label>
-            <input type="text" id="firstname" name="firstname" class="form-control" value="@form("firstname").getValue().getOrElse("")" />
-        </div>
+            <h2 class="form-signin-heading">Please register in</h2>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" placeholder="UserName" class="form-control" value="@form("username").getValue().getOrElse("")" required autofocus/>
 
-        <div class="row">
-            <label for="lastname">Lastname</label>
-            <input type="text" id="lastname" name="lastname" class="form-control" value="@form("lastname").getValue().getOrElse("")" />
-        </div>
+            <label for="firstname" class="sr-only">Firstname</label>
+            <input type="text" id="firstname" name="firstname" placeholder="FirstName" class="form-control" value="@form("firstname").getValue().getOrElse("")" required/>
 
-        <div class="row">
-            <label for="email">email</label>
-            <input type="email" id="email" name="email" class="form-control" value="@form("email").getValue().getOrElse("")" />
-        </div>
+            <label for="lastname" class="sr-only">Lastname</label>
+            <input type="text" id="lastname" name="lastname" placeholder="LastName" class="form-control" value="@form("lastname").getValue().getOrElse("")" required/>
 
-        <div class="row">
-            <label for="password">password</label>
-            <input type="password" id="password" name="password" class="form-control" value="@form("password").getValue().getOrElse("")" />
-        </div>
+            <label for="email" class="sr-only">email</label>
+            <input type="email" id="email" name="email" placeholder="Email" class="form-control" value="@form("email").getValue().getOrElse("")" required/>
 
-        @helper.CSRF.formField
-        <div class="row">
+            <label for="password" class="sr-only">password</label>
+            <input type="password" id="password" name="password" placeholder="Password" class="form-control" value="@form("password").getValue().getOrElse("")" required/>
+
+
+            @helper.CSRF.formField
             <div class="g-recaptcha" data-sitekey="6LfiVUYUAAAAAP3qovI4Or1-X2xKARJyLHBu96BL"></div>
-            <div>test</div>
-        </div>
-        <div class="row">
-            <input type="submit" value = "Zarejestruj"/>
-        </div>
-    </form>
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value = "Zarejestruj"/>
+        </form>
+    </div>
     <script src="https://www.google.com/recaptcha/api.js"></script>
 }

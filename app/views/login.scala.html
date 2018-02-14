@@ -1,20 +1,18 @@
 @main("Dziennik") {
-    <form method="post" action="@routes.LoginRegisterController.doLogin()">
-        <div class="row">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" class="form-control"/>
-        </div>
 
-        <div class="row">
-            <label for="login_password">Password</label>
-            <input type="password" name="password" id="login_password" class="form-control" />
-        </div>
+    <link href="@routes.Assets.versioned("stylesheets/style.css")" rel="stylesheet">
+    <div class="container">
+        <form class="form-signin" method="post" action="@routes.LoginRegisterController.doLogin()">
 
-        <div class="row">
-            <div class="col-xs-10">
-                <input type="submit" value = "Zaloguj!"/>
-            </div>
-        </div>
+            <h2 class="form-signin-heading">Please log in</h2>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" placeholder="UserName" name="username" class="form-control" required autofocus/>
 
-    </form>
+            <label for="login_password" class="sr-only">Password</label>
+            <input type="password" name="password" placeholder="Password" id="login_password" class="form-control" required/>
+
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value = "Zaloguj"/>
+
+        </form>
+    </div>
 }
