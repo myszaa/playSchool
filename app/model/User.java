@@ -1,24 +1,37 @@
 package model;
 
+import be.objectify.deadbolt.java.models.Permission;
+import be.objectify.deadbolt.java.models.Role;
+import be.objectify.deadbolt.java.models.Subject;
 import io.ebean.Finder;
 import io.ebean.Model;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name="users")
-public class User extends Model {
+public class User extends Model implements Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @Constraints.Required(message="error.field.required")
     private String username;
+    @Constraints.Required(message="error.field.required")
     private String firstname;
+    @Constraints.Required(message="error.field.required")
     private String lastname;
+    @Constraints.Required(message="error.field.required")
+    @Constraints.Email(message="error.email.invalid")
     private String email;
+    @Constraints.Required(message="error.field.required")
     private String password;
+    @Constraints.Required(message="error.field.required")
     private boolean enabled;
     private String activationtoken;
 
@@ -128,5 +141,20 @@ public class User extends Model {
     {
         User u = User.find.query().where().eq("username", username).findUnique();
         return u;
+    }
+
+    @Override
+    public List<? extends Role> getRoles() {
+        return null;
+    }
+
+    @Override
+    public List<? extends Permission> getPermissions() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public String getIdentifier() {
+        return username;
     }
 }

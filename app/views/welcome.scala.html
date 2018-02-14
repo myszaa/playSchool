@@ -1,3 +1,4 @@
+@(messages: play.i18n.Messages)
 @main("Dziennik") {
-    <h1> Witaj w playSchool dziennik</h1>
-}
+    <h1> @messages.at("home.welcome")</h1>
+}(messages)

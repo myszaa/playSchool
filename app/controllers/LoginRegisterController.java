@@ -22,11 +22,11 @@ public class LoginRegisterController extends Controller {
     FormFactory formFactory;
 
     public Result register() {
-        return ok(register.render(formFactory.form(User.class)));
+        return ok(register.render(formFactory.form(User.class),Http.Context.current().messages()));
     }
 
     public Result login() {
-        return ok(login.render());
+        return ok(login.render(Http.Context.current().messages()));
     }
 
     public Result doLogin() {
@@ -48,8 +48,12 @@ public class LoginRegisterController extends Controller {
 
     public Result doRegister() {
         Form<User> formClient = formFactory.form(User.class).bindFromRequest();
-        User user = formClient.bindFromRequest().get();
+
+        if (formClient.hasErrors()){
+            return badRequest(register.render(formClient, Http.Context.current().messages()));
+        }
         try {
+            User user = formClient.bindFromRequest().get();
             DynamicForm form = formFactory.form().bindFromRequest();
             if (RecaptchaService.verify(form.get("g-recaptcha-response"))) {
                 user.setEnabled(false);

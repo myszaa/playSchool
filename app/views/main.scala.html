@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(messages: play.i18n.Messages)
 
 <!DOCTYPE html>
 
@@ -16,9 +16,11 @@
         <link href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")" rel="stylesheet">
     </head>
     <body>
-        <a href="@routes.LoginRegisterController.register()">Zarejestruj</a>
-        <a href="@routes.LoginRegisterController.login()">Zaloguj</a>
-        <a href="@routes.LoginRegisterController.logout()">Wyloguj</a>
+        <li><a href="@routes.Application.changeToPolish()">PL</a></li>
+        <li><a href=@routes.Application.changeToEng()>EN</a></li>
+        <a href="@routes.LoginRegisterController.register()">@messages.at("home.register")</a>
+        <a href="@routes.LoginRegisterController.login()">@messages.at("home.login")</a>
+        <a href="@routes.LoginRegisterController.logout()">@messages.at("home.logout")</a>
         <a href="@routes.Application.pdf()">PDF</a>
         @content
     </body>

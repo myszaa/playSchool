@@ -4,6 +4,8 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /langPl                     controllers.Application.changeToPolish()
+GET     /langEng                    controllers.Application.changeToEng()
 GET     /pdf                        controllers.Application.pdf()
 GET     /register                   controllers.LoginRegisterController.register()
 POST    /register                   controllers.LoginRegisterController.doRegister()

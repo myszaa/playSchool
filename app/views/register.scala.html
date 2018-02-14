@@ -1,5 +1,5 @@
 @import model.User
-@(form: Form[User])
+@(form: Form[User])(messages: play.i18n.Messages)
 @main("Dziennik") {
 
     <link href="@routes.Assets.versioned("stylesheets/style.css")" rel="stylesheet">
@@ -7,18 +7,39 @@
         <form method="post" class="form-signin" action="@routes.LoginRegisterController.doRegister()">
 
             <h2 class="form-signin-heading">Please register in</h2>
+            @if(form!=null){
+                @for(error<- form("username").errors){
+                    <div class="alert alert-danger">Error</div>
+                }
+            }
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" placeholder="UserName" class="form-control" value="@form("username").getValue().getOrElse("")" required autofocus/>
-
+            @if(form!=null){
+                @for(error<- form("firstname").errors){
+                    <div class="alert alert-danger">Error</div>
+                }
+            }
             <label for="firstname" class="sr-only">Firstname</label>
             <input type="text" id="firstname" name="firstname" placeholder="FirstName" class="form-control" value="@form("firstname").getValue().getOrElse("")" required/>
-
+            @if(form!=null){
+                @for(error<- form("lastname").errors){
+                    <div class="alert alert-danger">Error</div>
+                }
+            }
             <label for="lastname" class="sr-only">Lastname</label>
             <input type="text" id="lastname" name="lastname" placeholder="LastName" class="form-control" value="@form("lastname").getValue().getOrElse("")" required/>
-
+            @if(form!=null){
+                @for(error<- form("email").errors){
+                    <div class="alert alert-danger">Error</div>
+                }
+            }
             <label for="email" class="sr-only">email</label>
             <input type="email" id="email" name="email" placeholder="Email" class="form-control" value="@form("email").getValue().getOrElse("")" required/>
-
+            @if(form!=null){
+                @for(error<- form("password").errors){
+                    <div class="alert alert-danger">Error</div>
+                }
+            }
             <label for="password" class="sr-only">password</label>
             <input type="password" id="password" name="password" placeholder="Password" class="form-control" value="@form("password").getValue().getOrElse("")" required/>
 
@@ -29,4 +50,4 @@
         </form>
     </div>
     <script src="https://www.google.com/recaptcha/api.js"></script>
-}
+}(messages)
