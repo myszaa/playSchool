@@ -12,6 +12,7 @@ scalaVersion := "2.11.11"
 libraryDependencies ++= Seq(
   guice,
   "org.postgresql" % "postgresql" % "9.4-1206-jdbc42",
+  "javax.mail" % "mail" % "1.4",
   javaJdbc,
   cache,
   javaWs )
